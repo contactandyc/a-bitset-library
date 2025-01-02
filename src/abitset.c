@@ -1,3 +1,4 @@
+#include <assert.h>
 #include "a-bitset-library/abitset.h"
 
 struct abitset_s {
@@ -151,7 +152,7 @@ static uint32_t portable_ctzll(uint64_t x) {
 #define __builtin_ctzll portable_ctzll
 #endif
 
-uint32_t abitset_first_enabled(abitset_t *bs) {
+int32_t abitset_first_enabled(abitset_t *bs) {
     uint64_t *p = bs->items;
     uint64_t *ep = bs->ep;
 

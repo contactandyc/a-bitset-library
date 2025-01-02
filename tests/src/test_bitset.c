@@ -4,7 +4,7 @@
 
 int main() {
     // Create a memory pool for the bitset
-    aml_pool_t *pool = aml_pool_init();  // Assuming aml_pool_init initializes a memory pool
+    aml_pool_t *pool = aml_pool_init(1024*16);  // Assuming aml_pool_init initializes a memory pool
 
     // Initialize a bitset with 100 bits
     abitset_t *bitset = abitset_init(pool, 100);
@@ -45,7 +45,7 @@ int main() {
     printf("First enabled bit is at index: %d\n", first);
 
     // Clean up
-    aml_pool_free(pool);  // Assuming aml_pool_free cleans up all allocations
+    aml_pool_destroy(pool);  // Assuming aml_pool_free cleans up all allocations
     printf("Cleaned up resources.\n");
 
     return 0;
