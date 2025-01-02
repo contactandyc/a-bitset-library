@@ -17,12 +17,10 @@ file(GLOB SOURCE_FILES src/*.c)
 # Dependencies
 find_package(amemorylibrary REQUIRED)
 find_package(themacrolibrary REQUIRED)
-find_package(thelz4library REQUIRED)
-find_package(ZLIB REQUIRED)
 
-set(STATIC_PACKAGES amemorylibrary_static thelz4library_static ZLIB::ZLIB)
-set(DEBUG_PACKAGES amemorylibrary_debug thelz4library_debug ZLIB::ZLIB)
-set(SHARED_PACKAGES amemorylibrary thelz4library ZLIB::ZLIB)
+set(STATIC_PACKAGES amemorylibrary_static)
+set(DEBUG_PACKAGES amemorylibrary_debug)
+set(SHARED_PACKAGES amemorylibrary)
 
 # Options
 option(DEBUG "Enable debugging" OFF)
