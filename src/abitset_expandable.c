@@ -1,4 +1,5 @@
 #include "a-bitset-library/abitset_expandable.h"
+#include "a-memory-library/aml_alloc.h"
 #include <stdlib.h>
 #include <string.h>
 

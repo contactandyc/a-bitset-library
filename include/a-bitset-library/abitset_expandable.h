@@ -1,7 +1,8 @@
-#ifndef _abitset_h
-#define _abitset_h
+#ifndef _abitset_expandable_h
+#define _abitset_expandable_h
 
-#include "a-memory-library/aml_pool.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 /*
  * The expandable bitset supports setting, unsetting, querying bits.  It will expand automatically when
