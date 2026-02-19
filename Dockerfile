@@ -65,6 +65,7 @@ ENV PATH="/opt/venv/bin:${PATH}"
 RUN set -eux; \
   git clone --depth 1 "https://github.com/contactandyc/a-memory-library.git" "a-memory-library" && \
   cd a-memory-library && \
+  ./build.sh clean && \
   ./build.sh install && \
   cd .. && \
   rm -rf a-memory-library
