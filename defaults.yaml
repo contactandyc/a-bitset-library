@@ -1,0 +1,24 @@
+version: 1.0.0
+
+# ── OSS Engine Routing ──
+packages:
+  base: true
+  flavor: true
+  changie: false
+  site: false
+  docs: false
+
+template_packages:
+  base:
+    - base/**
+  flavor:
+    - flavors/{{ repo_flavor }}/**
+  changie:
+    - mixins/changie/**
+  site:
+    - mixins/jekyll-site/**
+  docs:
+    - mixins/markdown-docs/**
+  resources:
+    - resources/**
+    - scaffold-repo.yaml
