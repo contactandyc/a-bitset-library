@@ -49,8 +49,11 @@ find_package(a_memory_library CONFIG REQUIRED)
 
 # ---- Dependencies (PkgConfig Shims) ----
 
+
 # ── Library variants (ALL are defined & built/installed) ──────────────────────
-add_library(a_bitset_library_debug  src/abitset.c  src/abitset_expandable.c)
+
+add_library(a_bitset_library_debug STATIC
+  src/abitset.c  src/abitset_expandable.c)
 
 target_include_directories(a_bitset_library_debug PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -84,7 +87,9 @@ install(TARGETS a_bitset_library_debug EXPORT a_bitset_libraryTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-add_library(a_bitset_library_memory  src/abitset.c  src/abitset_expandable.c)
+
+add_library(a_bitset_library_memory STATIC
+  src/abitset.c  src/abitset_expandable.c)
 
 target_include_directories(a_bitset_library_memory PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -121,7 +126,9 @@ install(TARGETS a_bitset_library_memory EXPORT a_bitset_libraryTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-add_library(a_bitset_library_static  src/abitset.c  src/abitset_expandable.c)
+
+add_library(a_bitset_library_static STATIC
+  src/abitset.c  src/abitset_expandable.c)
 
 target_include_directories(a_bitset_library_static PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -155,7 +162,9 @@ install(TARGETS a_bitset_library_static EXPORT a_bitset_libraryTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-add_library(a_bitset_library_shared  src/abitset.c  src/abitset_expandable.c)
+
+add_library(a_bitset_library_shared SHARED
+  src/abitset.c  src/abitset_expandable.c)
 
 target_include_directories(a_bitset_library_shared PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
