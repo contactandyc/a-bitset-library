@@ -1,11 +1,19 @@
 project_title: A Bitset Library
 version: 0.0.1
+stack: c/cmake
+date_created: 2019-08-01
 
-profile: andy-curtis/andy-curtis-knode
-template: cmake-c-git
+base_templates:
+  repo: https://github.com/contactandyc/scaffold-templates.git
+  ref: main
 
-# override from profile
-license_profile: andy-curtis/knode-shared-23
+includes:
+  - source: licenses/apache-2.0
+  - source: profiles/default
+
+copyrights:
+  - contributors.andy_curtis
+  - contributors.knode
 
 depends_on:
   - https://github.com/contactandyc/a-memory-library.git
