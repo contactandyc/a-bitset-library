@@ -17,11 +17,23 @@ option(A_ENABLE_COVERAGE "Enable code coverage instrumentation" OFF)
 
 find_library(M_LIB m)
 
-# ---- Test executables ----
-set(TEST_EXECUTABLES "")
-add_executable(test_bitset  src/test_bitset.c)
+find_package(a_memory_library CONFIG REQUIRED)
 
-target_include_directories(test_bitset PRIVATE  ${CMAKE_CURRENT_SOURCE_DIR}/src)
+# Fallback for standalone test builds (when not included via add_subdirectory)
+if(NOT TARGET a_bitset_library::a_bitset_library)
+  find_package(a_bitset_library CONFIG REQUIRED)
+endif()
+
+set(TEST_EXECUTABLES "")
+
+# ---- Targets ----
+add_executable(test_bitset
+  src/test_bitset.c
+)
+
+target_include_directories(test_bitset PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/../src
+)
 
 list(APPEND TEST_EXECUTABLES test_bitset)
 
@@ -36,9 +48,7 @@ if("CXX" IN_LIST CMAKE_PROJECT_LANGUAGES)
   )
 endif()
 
-if(NOT TARGET a_bitset_library::a_bitset_library)
-  find_package(a_bitset_library CONFIG REQUIRED)
-endif()
+target_link_libraries(test_bitset PRIVATE a_memory_library::a_memory_library)
 target_link_libraries(test_bitset PRIVATE a_bitset_library::a_bitset_library)
 
 if(M_LIB)
@@ -62,9 +72,13 @@ if(A_ENABLE_COVERAGE)
 endif()
 
 add_test(NAME test_bitset COMMAND $<TARGET_FILE:test_bitset>)
-add_executable(test_bitset_expandable  src/test_bitset_expandable.c)
+add_executable(test_bitset_expandable
+  src/test_bitset_expandable.c
+)
 
-target_include_directories(test_bitset_expandable PRIVATE  ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_include_directories(test_bitset_expandable PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/../src
+)
 
 list(APPEND TEST_EXECUTABLES test_bitset_expandable)
 
@@ -79,9 +93,7 @@ if("CXX" IN_LIST CMAKE_PROJECT_LANGUAGES)
   )
 endif()
 
-if(NOT TARGET a_bitset_library::a_bitset_library)
-  find_package(a_bitset_library CONFIG REQUIRED)
-endif()
+target_link_libraries(test_bitset_expandable PRIVATE a_memory_library::a_memory_library)
 target_link_libraries(test_bitset_expandable PRIVATE a_bitset_library::a_bitset_library)
 
 if(M_LIB)
