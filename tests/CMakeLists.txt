@@ -9,6 +9,11 @@ cmake_minimum_required(VERSION 3.20)
 
 project(a_bitset_library_tests LANGUAGES C)
 
+if(CMAKE_PREFIX_PATH)
+  include_directories("${CMAKE_PREFIX_PATH}/include")
+  link_directories("${CMAKE_PREFIX_PATH}/lib")
+endif()
+
 set(A_BUILD_VARIANT "debug" CACHE STRING
     "Variant to link via a_bitset_library::a_bitset_library (debug|memory|static|shared)")
 set_property(CACHE A_BUILD_VARIANT PROPERTY STRINGS debug memory static shared)
@@ -27,12 +32,18 @@ endif()
 set(TEST_EXECUTABLES "")
 
 # ---- Targets ----
+# ==============================================================================
+# test_bitset Target (Standard Test)
+# ==============================================================================
 add_executable(test_bitset
   src/test_bitset.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/abitset.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/abitset_expandable.c
 )
 
 target_include_directories(test_bitset PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/../src
+  ${CMAKE_CURRENT_SOURCE_DIR}/../include
 )
 
 list(APPEND TEST_EXECUTABLES test_bitset)
@@ -68,12 +79,18 @@ if(A_ENABLE_COVERAGE)
 endif()
 
 add_test(NAME test_bitset COMMAND $<TARGET_FILE:test_bitset>)
+# ==============================================================================
+# test_bitset_expandable Target (Standard Test)
+# ==============================================================================
 add_executable(test_bitset_expandable
   src/test_bitset_expandable.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/abitset.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/abitset_expandable.c
 )
 
 target_include_directories(test_bitset_expandable PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/../src
+  ${CMAKE_CURRENT_SOURCE_DIR}/../include
 )
 
 list(APPEND TEST_EXECUTABLES test_bitset_expandable)
